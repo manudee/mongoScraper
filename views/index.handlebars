@@ -1,0 +1,39 @@
+<div class='jumbotron text-center'>
+	Welcome to web scraping
+	<div>
+		<button type="button" class='btn btn-danger col-offset-2' id='scrape'> Scrape Articles </button>
+	</div>
+
+</div>
+
+
+<div class='container'>
+
+
+
+	{{#each articles}}
+	<div class='row'>
+		<div id='article'>
+			<a href="{{this.link}}">{{this.title}}</a>
+		</div>
+		<div class="col-md-2  col-md-offset-8">
+			<button type="button" data-id= {{this._id}} class="btn btn-success save">Save Article</button>	
+		</div>
+
+		
+	</div>
+	{{/each}}
+
+	
+</div>
+
+{{!-- 	<div class='row'>
+		<div id='article'>
+			{{!-- 	{{#each dbarticle}} --}}
+{{!-- 			<div class="col-md-2  col-md-offset-8">
+				<button type="button" data-id= '1'class="btn btn-success save">Add Note</button>	
+			</div>
+			<div class="col-md-2">
+				<button type="button" data-id= '1'class="btn btn-warning save">Delete Article</button>	
+			</div>
+			{{!-- 		{{/each}} --}}
