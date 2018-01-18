@@ -1,0 +1,30 @@
+<div class='container'>
+
+	<div class='jumbotron text-center'>
+		Welcome to web scraping
+	</div>
+
+
+
+	<div class="row">
+		<div id="article">
+
+
+
+			{{#each savedArticles}}
+			{{#if this.saved}}
+				<div class='row'>
+					<div class='articles'>
+						<a href="{{this.link}}">{{this.title}}</a>
+						<button type="button" data-id= {{this._id}} class="btn btn-success delete">DELETE FROM SAVED</button>	
+						<button type="button" data-id= {{this._id}} class="btn btn-success notes">ARTICLE NOTES</button>	
+					</div>
+				</div>
+				{{/if}}
+			{{/each}}
+
+
+		</div>
+
+</div>
+</div>
