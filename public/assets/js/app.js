@@ -25,7 +25,7 @@ $(function() {
 
 
 		$.ajax('/articles/'+ id, {
-			type: "POST",
+			type: "PUT",
 			data: 
 			{
 				saved: true
@@ -44,7 +44,7 @@ $(function() {
 		$(this).hide();
 		
 		$.ajax('/articles/'+ id, {
-			type: "POST",
+			type: "PUT",
 			data: 
 			{
 				saved: false
@@ -66,7 +66,75 @@ $(function() {
 
 		location.reload();
 
+	});
+
+
+
+
+	$("#my-modal").on('show.bs.modal', function(event){
+
+
+		var button = $(event.relatedTarget);
+		var buttonId = button.data('id');
+
+		console.log(buttonId);
+
+		$('#savenote').attr('data-id',buttonId );
+	})
+
+	
+
+	$('body').on('click', '#savenote', function(savedNote){
+
+			var id = $(this).attr('data-id');
+			console.log(id);
+
+			$.ajax({
+				method: "POST",
+				url: "/articles/" + id,
+				data: {
+			      // Value taken from title input
+
+			      // Value taken from note textarea
+			      body: $("#text").val()
+			  }
+			})
+    // With that done
+    .then(function(data) {
+      // Log the response
+      console.log(data);
+      // Empty the notes section
+     
+
+  });
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+	$('body').on('click', '.notes', function(articleNotes){
+
+
+		$("#myModal").modal('show');
+
 	})
 
 
 });
+
+
+
+function emptyNotes(){
+
+		 $("#text").val("");
+}

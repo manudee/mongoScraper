@@ -11,20 +11,45 @@
 
 
 
-			{{#each savedArticles}}
+			{{#each articlesAfterSave}}
 			{{#if this.saved}}
-				<div class='row'>
-					<div class='articles'>
-						<a href="{{this.link}}">{{this.title}}</a>
-						<button type="button" data-id= {{this._id}} class="btn btn-success delete">DELETE FROM SAVED</button>	
-						<button type="button" data-id= {{this._id}} class="btn btn-success notes">ARTICLE NOTES</button>	
+			<div class='row'>
+				<div class='articles'>
+					<a  href="{{this.link}}">{{this.title}}</a>
+					<button type="button" data-id= {{this._id}} class="btn btn-success delete">DELETE FROM SAVED</button>	
+					{{!-- 		<button type="button" data-id= {{this._id}} class="btn btn-success notes">ARTICLE NOTES</button>	 --}}
+					<button type="button"  class="btn btn-success notes" data-id= {{this._id}} data-val="user1" data-toggle="modal" data-target="#my-modal">ARTICLE NOTES</button>
+				</div>
+			</div>
+
+			<!-- Login modal start here-->
+
+			<div class="modal fade" id="my-modal" tabindex="-1" role="dialog" aria-labelledby="my-modal" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Article Notes</h5>
+
+						</div>
+						<div class="modal-body">
+							<textarea type="text" name="note" rows=5 columns=50 placeholder="notes" id="text"></textarea> 
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="close btn btn-succes "  id="savenote" data-dismiss="modal" aria-label="Close" >
+								<span aria-hidden="true">SAVE NOTE</span>
+							</button>
+						</div>
 					</div>
 				</div>
-				{{/if}}
+			</div>
+
+
+			{{/if}}
 			{{/each}}
 
 
-		</div>
 
-</div>
+
+		</div>
+	</div>
 </div>
