@@ -29,28 +29,20 @@ mongoose.connect("mongodb://localhost/webScraper", {useMongoClient: true});
 
 console.log("******Scraping high heel confidential********");
 
-
+//home route to render index html page
 app.get('/', function(req,res){
 
-	
-
-	res.render('index');
+		res.render('index');
 	
 });
 
 
-
+//scrape route to scrape articles and create articles collections in db
 app.get('/scrape', function(req,res){
-
-
 
 	request('https://www.highheelconfidential.com/', function(error, response, html){
 
-
 		var $ = cheerio.load(html);
-
-
-
 
 		$('li').each(function(i, element){
 			var results = {};
@@ -65,21 +57,15 @@ app.get('/scrape', function(req,res){
 
 				console.log(dbarticle);
 
-
 			})
 			.catch(function(err){
 
 				return res.json(err)
 			});
 
+	});
 
-
-
-		});
-
-		
-
-		res.send('scrape done');
+	res.redirect('/articles');
 		
 
 	});
@@ -88,11 +74,8 @@ app.get('/scrape', function(req,res){
 
 
 
-
+//articles route to get all the articles from the database
 app.get('/articles', function(req,res){
-
-
-
 
 	db.article.find({})
 	.then(function(dbarticle){
@@ -143,16 +126,17 @@ app.get('/savedArticles', function(req, res){
 
 
 	db.article.find({saved: true})
+	.populate("note")
 	.then(function(savedArticles){
 
 
-
+		//console.log(savedArticles);
 
 		var savedArticlesObj = {
 			articlesAfterSave : savedArticles
 		}
 
-		console.log(savedArticlesObj);
+		//console.log(savedArticlesObj);
 
 		//res.json(savedArticlesObj);
 		res.render('saved',savedArticlesObj);
@@ -178,7 +162,8 @@ app.post("/articles/:id", function(req, res) {
   })
   .then(function(dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
-      res.json(dbArticle);
+   //   res.json(dbArticle);
+      console.log(dbArticle);
   })
   .catch(function(err) {
       // If an error occurred, send it to the client
@@ -189,27 +174,47 @@ app.post("/articles/:id", function(req, res) {
 
 
 
-//route for populating articles with its notes
-app.get("/articles/:id", function(req, res) {
-  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-  db.article
-  .findOne({ _id: req.params.id })
-    // ..and populate all of the notes associated with it
-    .populate("note")
-    .then(function(dbArticleNotes) {
-      // If we were able to successfully find an Article with the given id, send it back to the client
-      res.json(dbArticleNotes);
+// //route for populating articles with its notes
+// app.get("/articles/:id", function(req, res) {
+//   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+//   db.article
+//   .findOne({ _id: req.params.id })
+//     // ..and populate all of the notes associated with it
+//     .populate("note")
+//     .then(function(dbArticleNotes) {
+//       // If we were able to successfully find an Article with the given id, send it back to the client
+//       res.json(dbArticleNotes);
 
-      	//res.render('saved',dbArticle);
-  })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-  });
-});
+//       	//res.render('saved',dbArticle);
+//       })
+//     .catch(function(err) {
+//       // If an error occurred, send it to the client
+//       res.json(err);
+//   });
+// });
 
 
 
-app.listen(PORT, function() {
-	console.log("App running on port " + PORT + "!");
-});
+app.post("/notes/:id", function(req,res){
+
+
+
+
+	db.note.findOneAndRemove({"_id": req.params.id}, function (err, deletedNote) {
+
+		if (err) {
+			console.log(err);
+		} else {
+
+		}
+		res.send(deletedNote);
+
+
+
+	});
+
+})
+
+	app.listen(PORT, function() {
+		console.log("App running on port " + PORT + "!");
+	});

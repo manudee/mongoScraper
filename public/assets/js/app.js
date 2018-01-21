@@ -1,18 +1,19 @@
 $(function() {
 
-	$("body").on("click","#scrape", function(event) {
+	// $("body").on("click","#scrape", function(event) {
 
 
-		$.ajax('/scrape',{
-			type: "GET"
-		}).then(function(){
-			console.log('Scraped Data');
-		})
+	// 	$.ajax('/scrape',{
+	// 		type: "GET"
+	// 	}).then(function(){
+	// 		// console.log('Scraped Data');
+	// 		window.location = '/articles'
+	// 	})
 
 
 
 
-	});
+	// });
 
 
 
@@ -21,7 +22,7 @@ $(function() {
 
 		var id = $(this).attr('data-id');
 
-		$(this).toggle();
+		// $(this).hide();
 
 
 		$.ajax('/articles/'+ id, {
@@ -33,15 +34,16 @@ $(function() {
 		}).then(function(saved){
 
 			console.log("article saved");
-			location.reload();
+			// location.reload();
+			
 		});
-
+		location.reload();
 	});
 
 	$('body').on('click', '.delete', function(event){
 
 		var id = $(this).attr('data-id');
-		$(this).hide();
+		// $(this).hide();
 		
 		$.ajax('/articles/'+ id, {
 			type: "PUT",
@@ -51,71 +53,87 @@ $(function() {
 			}
 		}).then(function(saved){
 			console.log("article deleted from saved");
-			location.reload();
+			
 		});
-
+		location.reload();
 	});
 
 
-	$('body').on('click', '#saved', function(savedArticles){
-		$.ajax('/savedArticles',{
-			type: "GET"
-		}).then(function(){
-			console.log('Saved Articles Data');
+	// $('body').on('click', '#saved', function(savedArticles){
+	// 	$.ajax('/savedArticles',{
+	// 		type: "GET"
+	// 	}).then(function(){
+	// 		console.log('Saved Articles Data');
+	// 	})
+
+	// 	location.reload();
+
+	// });
+
+
+
+
+	// $("#my-modal").on('show.bs.modal', function(event){
+
+
+	// 	var button = $(event.relatedTarget);
+	// 	var buttonId = button.data('id');
+
+	// 	console.log(buttonId);
+
+	// 	$('#savenote').attr('data-id',buttonId );
+
+	// })
+
+	
+
+	$('body').on('click', '#savenote', function(savedNote){
+
+		var id = $(this).attr('data-id');
+		console.log(id);
+		console.log($("#note"+id).val())
+
+		$.ajax({
+			method: "POST",
+			url: "/articles/" + id,
+			data: {
+
+				body: $("#note"+id).val()
+			}
 		})
 
+		.then(function(data) {
+
+			console.log(data);
+
+
+
+
+		});
 		location.reload();
 
 	});
 
 
 
+	$('body').on('click', "#deleteNote", function(){
 
-	$("#my-modal").on('show.bs.modal', function(event){
+		var notesId = $(this).attr('data-id');
+		console.log("Notes ID" , notesId);
+
+		$.ajax({
+
+			method: "POST",
+			url: "/notes" + notesId
+		}).then(function(data){
+			console.log(data);
+		});
+
+		location.reload();
 
 
-		var button = $(event.relatedTarget);
-		var buttonId = button.data('id');
 
-		console.log(buttonId);
-
-		$('#savenote').attr('data-id',buttonId );
 	})
-
-	
-
-	$('body').on('click', '#savenote', function(savedNote){
-
-			var id = $(this).attr('data-id');
-			console.log(id);
-
-			$.ajax({
-				method: "POST",
-				url: "/articles/" + id,
-				data: {
-			      // Value taken from title input
-
-			      // Value taken from note textarea
-			      body: $("#text").val()
-			  }
-			})
-    // With that done
-    .then(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-     
-
-  });
-
-
-
-
-
-
-
-});
-
 
 
 
@@ -134,7 +152,7 @@ $(function() {
 
 
 
-function emptyNotes(){
+// function emptyNotes(){
 
-		 $("#text").val("");
-}
+// 	$("#text").val("");
+// }
