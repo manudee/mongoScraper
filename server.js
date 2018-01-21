@@ -24,7 +24,9 @@ app.set("view engine", "handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/webScraper", {useMongoClient: true});
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/webScraper";
+
+mongoose.connect(MONGODB_URI, {useMongoClient: true});
 
 
 console.log("******Scraping high heel confidential********");
