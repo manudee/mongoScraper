@@ -32,7 +32,7 @@ console.log("******Scraping high heel confidential********");
 //home route to render index html page
 app.get('/', function(req,res){
 
-		res.render('index');
+	res.render('index');
 	
 });
 
@@ -63,9 +63,9 @@ app.get('/scrape', function(req,res){
 				return res.json(err)
 			});
 
-	});
+		});
 
-	res.redirect('/articles');
+		res.redirect('/articles');
 		
 
 	});
@@ -83,7 +83,8 @@ app.get('/articles', function(req,res){
 		console.log(dbarticle.length);
 
 		var dbarticleObj = {
-			articles : dbarticle
+			articles : dbarticle,
+			length: dbarticle.length
 		}
 		//res.json(dbarticleObj);
 		res.render('index',dbarticleObj);
@@ -163,8 +164,8 @@ app.post("/articles/:id", function(req, res) {
   .then(function(dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
    //   res.json(dbArticle);
-      console.log(dbArticle);
-  })
+   console.log(dbArticle);
+})
   .catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
@@ -174,40 +175,18 @@ app.post("/articles/:id", function(req, res) {
 
 
 
-// //route for populating articles with its notes
-// app.get("/articles/:id", function(req, res) {
-//   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
-//   db.article
-//   .findOne({ _id: req.params.id })
-//     // ..and populate all of the notes associated with it
-//     .populate("note")
-//     .then(function(dbArticleNotes) {
-//       // If we were able to successfully find an Article with the given id, send it back to the client
-//       res.json(dbArticleNotes);
-
-//       	//res.render('saved',dbArticle);
-//       })
-//     .catch(function(err) {
-//       // If an error occurred, send it to the client
-//       res.json(err);
-//   });
-// });
-
-
 
 app.post("/notes/:id", function(req,res){
 
-
-
-
-	db.note.findOneAndRemove({"_id": req.params.id}, function (err, deletedNote) {
+	console.log(req.params.id);
+	db.note.findByIdAndRemove({_id: req.params.id}, function (err, deletedNote) {
 
 		if (err) {
 			console.log(err);
 		} else {
-
+				res.send(deletedNote);
 		}
-		res.send(deletedNote);
+	
 
 
 
@@ -215,6 +194,6 @@ app.post("/notes/:id", function(req,res){
 
 })
 
-	app.listen(PORT, function() {
-		console.log("App running on port " + PORT + "!");
-	});
+app.listen(PORT, function() {
+	console.log("App running on port " + PORT + "!");
+});

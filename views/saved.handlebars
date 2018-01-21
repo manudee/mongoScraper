@@ -35,7 +35,7 @@
 							<div class="row">
 								{{#if this.note.body}}
 									<div class='panel'>{{this.note.body}}
-										<button class="btn btn-danger btn-sm" id="deleteNote" data-id={{this.note._id}}>&times</button>
+										<button class="btn btn-danger btn-sm notesToDelete" id="deleteNote{{this.note._id}}" data-id={{this.note._id}}>&times</button>
 
 									</div>
 								{{/if}}

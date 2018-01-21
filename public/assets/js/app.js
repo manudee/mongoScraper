@@ -116,7 +116,7 @@ $(function() {
 
 
 
-	$('body').on('click', "#deleteNote", function(){
+	$('body').on('click', ".notesToDelete", function(){
 
 		var notesId = $(this).attr('data-id');
 		console.log("Notes ID" , notesId);
@@ -124,7 +124,7 @@ $(function() {
 		$.ajax({
 
 			method: "POST",
-			url: "/notes" + notesId
+			url: "/notes/" + notesId
 		}).then(function(data){
 			console.log(data);
 		});
