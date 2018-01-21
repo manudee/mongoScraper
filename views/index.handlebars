@@ -5,33 +5,58 @@
 		Welcome to web scraping
 		<div>
 			<form method='get' action='/scrape' > 
-				<button class='btn btn-danger col-offset-2' type='submit' value='Submit' id='scrape'> Scrape Articles </button>
-			</form>
-			<form method='get' action='/savedArticles'>
-			<button class='btn btn-warning col-offset-2'  type='submit' value='Submit' id='saved'> Saved Articles </button>
-			</form>
-		</div>
+				<button class='btn btn-danger col-offset-2' type='submit' data-toggle="modal" data-target="#myModal" value='Submit' id='scrape'> Scrape Articles </button>
+	</form>
+	<form method='get' action='/savedArticles'>
+		<button class='btn btn-warning col-offset-2'  type='submit' value='Submit' id='saved'> Saved Articles </button>
+	</form>
+</div>
 
-	</div>
-
-
+</div>
 
 
 
-	{{#each articles}}
-	<div class='row'>
+
+
+{{#each articles}}
+<div class='row'>
+
+	<div id='article'>
 		
-		<div id='article'>
-		
-			<a href="{{this.link}}">{{this.title}}</a>
+		<a href="{{this.link}}">{{this.title}}</a>
 		{{#unless this.saved}}
-			<button type="button" data-id= {{this._id}} class="col-md-2-offset-6 btn btn-success save">Save Article</button>	
+		<button type="button" data-id= {{this._id}} class="col-md-2-offset-6 btn btn-success save">Save Article</button>	
 		{{/unless}}
-		</div>
-		
-		
 	</div>
-	{{/each}}
+
+
+</div>
+{{/each}}
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="my-modal" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">You have scraped: </h5>
+			</div>
+			<div class="modal-body text-center">
+
+				<div class='panel'>
+					{{length}} Articles
+				</div>
+
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-warning " data-id={{this._id}} data-dismiss="modal" aria-label="Close" >
+						<span aria-hidden="true">CLOSE</span>
+					</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 	
 </div>

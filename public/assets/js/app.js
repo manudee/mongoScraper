@@ -4,12 +4,14 @@ $(function() {
 
 
 	// 	$.ajax('/scrape',{
-	// 		type: "GET"
-	// 	}).then(function(){
-	// 		// console.log('Scraped Data');
-	// 		window.location = '/articles'
-	// 	})
+	// 		type: "GET",
+	// 		success: function(result){
 
+	// 			$("#myModal").modal("show");
+
+	// 		}
+			
+	// 	})
 
 
 
@@ -58,32 +60,6 @@ $(function() {
 		location.reload();
 	});
 
-
-	// $('body').on('click', '#saved', function(savedArticles){
-	// 	$.ajax('/savedArticles',{
-	// 		type: "GET"
-	// 	}).then(function(){
-	// 		console.log('Saved Articles Data');
-	// 	})
-
-	// 	location.reload();
-
-	// });
-
-
-
-
-	// $("#my-modal").on('show.bs.modal', function(event){
-
-
-	// 	var button = $(event.relatedTarget);
-	// 	var buttonId = button.data('id');
-
-	// 	console.log(buttonId);
-
-	// 	$('#savenote').attr('data-id',buttonId );
-
-	// })
 
 	
 
@@ -148,11 +124,8 @@ $(function() {
 	})
 
 
+
+
+
 });
 
-
-
-// function emptyNotes(){
-
-// 	$("#text").val("");
-// }
