@@ -34,26 +34,26 @@ You have 2 options at this point
 ## Delete from Saved
 If you choose to use option "Delete from Saved"
 	
-	![Alt Text](/public/assets/images/deleteFromSaved.PNG)
+![Alt Text](/public/assets/images/deleteFromSaved.PNG)
 
 Once that request is performed, you will see the article back in the list of saved Articles , on article route.
 
-	![Alt Text](/public/assets/images/DeletedFromSaved.PNG)
+![Alt Text](/public/assets/images/DeletedFromSaved.PNG)
 
 
 
 ## Article Notes
 Once you click on "Article Notes" button, a modal will open up where you can add Article notes and saved it to the database.
 
-	![Alt Text](/public/assets/images/articleNotes.PNG)
+![Alt Text](/public/assets/images/articleNotes.PNG)
 
-	![Alt Text](/public/assets/images/AddingaNote.PNG)
+![Alt Text](/public/assets/images/AddingaNote.PNG)
 
 ## Save  Note
 
 Once you click on "Save Note" on the modal and if you reopen the article notes, you will see an existing note on the article if any.
 
-	![Alt Text](/public/assets/images/SavedNote.PNG)
+![Alt Text](/public/assets/images/SavedNote.PNG)
 
 
 Using the Red Cancel button on the note, you have an option to delete the note from that article.
@@ -61,10 +61,10 @@ Using the Red Cancel button on the note, you have an option to delete the note f
 ## Delete Note
 Once you delete the note from the article, it is deleted from the database and not associated with the article anymore.
 
-	![Alt Text](/public/assets/images/DeleteNote.PNG)
+![Alt Text](/public/assets/images/DeleteNote.PNG)
 
 
-	![Alt Text](/public/assets/images/afterNoteDeletion.PNG)
+![Alt Text](/public/assets/images/afterNoteDeletion.PNG)
 
 
 # Technology Stack
